@@ -8,6 +8,8 @@ export default function useParallax(motionAllowed = true, requeryKey = null) {
 
     const figures = Array.from(document.querySelectorAll('[data-parallax], .project figure'))
       .filter(isGlobalProjectMotionTarget)
+      // 舞台海报必须与背景框像素级对齐，任何缩放/漂移都会让它溢出框外
+      .filter((figure) => !figure.closest('.poster-story__stage'))
     const seen = new Set()
     const items = []
     figures.forEach((figure) => {
