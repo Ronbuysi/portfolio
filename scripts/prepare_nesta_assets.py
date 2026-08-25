@@ -55,6 +55,11 @@ ASSETS = {
     "作品386459827350_04.png": "application-packaging",
     "作品947195656_01.png": "identity-symbol-library",
     "作品947195656_02.png": "identity-pattern-library",
+    "插画说明1.jpg": "identity-illustration-concept",
+    "插画说明2.jpg": "identity-illustration-scenes",
+    "插画说明3.jpg": "application-social-kv",
+    "物料应用1.jpg": "application-collateral-set",
+    "物料应用2.jpg": "application-packaging-box",
 }
 
 

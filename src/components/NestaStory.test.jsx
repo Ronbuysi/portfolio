@@ -36,11 +36,11 @@ test('opens the complete research archive from a prominent disclosure entrance',
   expect(screen.getByText('IKEA')).toBeInTheDocument()
 })
 
-test('renders 48 responsive images with useful alt text', () => {
+test('renders 53 responsive images with useful alt text', () => {
   const { container } = render(<NestaStory project={project} />)
   const images = container.querySelectorAll('img')
 
-  expect(images).toHaveLength(48)
+  expect(images).toHaveLength(53)
   images.forEach((image) => {
     expect(image).toHaveAttribute('loading', 'lazy')
     expect(image).toHaveAttribute('decoding', 'async')

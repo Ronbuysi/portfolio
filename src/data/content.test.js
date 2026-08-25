@@ -221,7 +221,7 @@ describe('public content', () => {
     projects.forEach((project) => expect(project.accent).toMatch(/^#[0-9a-fA-F]{6}$/))
   })
 
-  test('models NESTA as a six-act editorial case study with 48 unique source assets', () => {
+  test('models NESTA as a six-act editorial case study with 53 unique source assets', () => {
     const nesta = projects.find((project) => project.id === 'nesta-furniture')
     const groups = nesta.caseStudy
     const media = [
@@ -250,10 +250,10 @@ describe('public content', () => {
     expect(groups.research.insights).toHaveLength(3)
     expect(groups.research.evidence).toHaveLength(5)
     expect(groups.research.competitors).toHaveLength(5)
-    expect(groups.identity).toHaveLength(4)
+    expect(groups.identity).toHaveLength(5)
     expect(groups.applications).toHaveLength(4)
-    expect(media).toHaveLength(48)
-    expect(new Set(media.map(({ src }) => src)).size).toBe(48)
+    expect(media).toHaveLength(53)
+    expect(new Set(media.map(({ src }) => src)).size).toBe(53)
     media.forEach(({ src, alt }) => {
       expect(src).toMatch(/^\/images\/nesta\/[a-z0-9-]+\.jpg$/)
       expect(alt.length).toBeGreaterThan(5)

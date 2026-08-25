@@ -567,6 +567,13 @@ export const projects = [
           media: [nestaMedia('identity-symbol-library', 'NESTA 家具插画符号库', 'SYMBOLS / 03')],
         },
         {
+          key: 'illustration', title: '插画世界', copy: '从家具符号生长出生活场景，让空间有了呼吸与情绪。',
+          media: [
+            nestaMedia('identity-illustration-concept', 'NESTA 插画世界设计理念与 Where Life Breathes 线稿', 'ILLUSTRATION / 01'),
+            nestaMedia('identity-illustration-scenes', 'NESTA 桌面、座椅阅读与独处三个生活场景插画', 'ILLUSTRATION / 02'),
+          ],
+        },
+        {
           key: 'pattern', title: '纹样节奏', copy: '用几何模块扩展出持续可用的图形系统。',
           media: [nestaMedia('identity-pattern-library', 'NESTA 几何纹样系统', 'PATTERN / 04')],
         },
@@ -578,11 +585,18 @@ export const projects = [
         },
         {
           key: 'social', title: '社交内容',
-          media: ['application-social-mobile', 'positioning-visual', 'application-collage'].map((name, index) => nestaMedia(name, 'NESTA 社交媒体与移动端内容', `SOCIAL / 0${index + 1}`)),
+          media: [
+            ...['application-social-mobile', 'positioning-visual', 'application-collage'].map((name, index) => nestaMedia(name, 'NESTA 社交媒体与移动端内容', `SOCIAL / 0${index + 1}`)),
+            nestaMedia('application-social-kv', 'NESTA 线上运营 KV 的社交媒体帖子应用', 'SOCIAL / 04'),
+          ],
         },
         {
           key: 'product', title: '产品物料',
-          media: ['application-vi-board', 'application-product-card', 'application-brand-story', 'application-packaging'].map((name, index) => nestaMedia(name, 'NESTA 产品卡、品牌物料与包装应用', `PRODUCT / 0${index + 1}`)),
+          media: [
+            ...['application-vi-board', 'application-product-card', 'application-brand-story', 'application-packaging'].map((name, index) => nestaMedia(name, 'NESTA 产品卡、品牌物料与包装应用', `PRODUCT / 0${index + 1}`)),
+            nestaMedia('application-collateral-set', 'NESTA 品牌物料应用全家福', 'PRODUCT / 05'),
+            nestaMedia('application-packaging-box', 'NESTA 产品包装箱应用', 'PRODUCT / 06'),
+          ],
         },
         {
           key: 'space', title: '空间体验',
