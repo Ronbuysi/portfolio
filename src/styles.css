@@ -159,6 +159,11 @@ a:focus-visible { outline: 2px solid var(--acid); outline-offset: 5px; }
 .project figure figcaption { transition: opacity .35s ease, transform .45s cubic-bezier(.22, 1, .36, 1); }
 .project figure:hover figcaption { opacity: 1 !important; }
 .work-ring { position: relative; width: 100vw; margin-left: calc(50% - 50vw); margin-top: clamp(2rem, 4vw, 3.5rem); }
+.work-cards__head { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding-inline: max(2rem, calc(50vw - var(--shell) / 2)); }
+.work-cards__head .mini-label { margin-bottom: 0; }
+.work-cards__nav { display: flex; gap: .5rem; }
+.work-cards__nav button { display: grid; place-items: center; width: 2.7rem; height: 2.7rem; border: 1px solid var(--line); background: rgba(12,12,12,.5); color: var(--paper); font: .95rem/1 ui-monospace, monospace; cursor: pointer; transition: border-color .25s ease, color .25s ease; }
+.work-cards__nav button:hover { border-color: var(--acid); color: var(--acid); }
 .project-rail { display: flex; flex-wrap: wrap; gap: .5rem .4rem; margin-top: 1.6rem; }
 .project-rail__item { display: inline-flex; align-items: baseline; gap: .55rem; padding: .55rem .8rem; border: 1px solid var(--line); background: rgba(12,12,12,.5); color: var(--paper); cursor: pointer; transition: border-color .25s ease, color .25s ease, background .25s ease; }
 .project-rail__item:hover { border-color: var(--acid); color: var(--acid); }
@@ -821,7 +826,6 @@ html:not(.is-ready) .hero__content > *, html:not(.is-ready) .hero__scroll-cue, h
   .project .ip-story__service-item figcaption span:last-child { display: inline; }
 
   .poster-story__originals { grid-template-columns: 1fr; }
-  .poster-story__stage-frames { display: none; }
   .poster-story__timeline { grid-template-columns: 1fr; }
   .poster-story__timeline article:first-child { border-right: 0; border-bottom: 1px solid var(--line); }
   .poster-story__swatches { grid-template-columns: 1fr; }
@@ -1920,7 +1924,9 @@ main { position:relative; z-index:1; }
 .work-ring__controls input[type="range"]::-webkit-slider-thumb { background:#061a35; border-color:#d8ff36; }
 
 @media (max-width:1024px) {
-  .work-ring__stage[data-ring-mode="track"],.work-ring__stage[data-ring-mode="snap"] { height:auto; min-height:25rem; overflow-x:auto; perspective:none; touch-action:pan-x pan-y; }
+  .work-ring__stage[data-ring-mode="track"],.work-ring__stage[data-ring-mode="snap"] { height:auto; min-height:25rem; overflow-x:auto; perspective:none; touch-action:pan-x pan-y; scrollbar-width:none; }
+  .work-ring__stage[data-ring-mode="track"]::-webkit-scrollbar,.work-ring__stage[data-ring-mode="snap"]::-webkit-scrollbar { display:none; }
+  .work-ring__controls { display:none; }
   .work-ring__stage[data-ring-mode="track"] .work-ring__scene,.work-ring__stage[data-ring-mode="snap"] .work-ring__scene { position:relative; min-width:max-content; transform:none; }
   .work-ring__stage[data-ring-mode="track"] .work-ring__spin,.work-ring__stage[data-ring-mode="snap"] .work-ring__spin { position:relative; display:flex; gap:1rem; padding:2rem; transform:none!important; }
   .work-ring__stage[data-ring-mode="track"] .work-ring__card,.work-ring__stage[data-ring-mode="snap"] .work-ring__card { position:relative; left:auto; top:auto; width:min(62vw,18rem)!important; transform:none!important; opacity:1!important; flex:none; }
@@ -1963,6 +1969,13 @@ main { position:relative; z-index:1; }
   .strengths__grid > .border-glow-card,
   .strengths__grid article { min-height: 0; }
   .strengths__grid > .border-glow-card article { justify-content: flex-start; gap: 1.1rem; padding: 1.4rem 1.3rem; }
+
+  /* 轮播卡片：投影收紧加强，深色底上每张都清晰可见、保持一致 */
+  .work-ring__card-in { box-shadow: 0 16px 36px rgba(0,0,0,.55), 0 3px 10px rgba(0,0,0,.45); }
+
+  /* 轮播头部：对齐手机端 16px 页面留白，箭头随 3D 模式一起缩小 */
+  .work-cards__head { padding-inline: 1rem; }
+  .work-cards__nav button { width: 2.3rem; height: 2.3rem; }
 
   /* Contact：内容成组居中，不再上下两段大空白 */
   .contact__inner { min-height: 100svh; justify-content: center; gap: 2.8rem; padding: 4rem 0 3rem; }

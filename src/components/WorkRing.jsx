@@ -117,9 +117,10 @@ export default function WorkRing({ onOpen }) {
     const reduced = !forced && window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches
     const mode = ringMode({ desktop: window.innerWidth >= 1025, tablet: window.innerWidth >= 721 })
     stage.dataset.ringMode = mode
+    const flat = mode !== '3d' // 手机/平板胶片模式：原生横滑，角度系统不参与
 
     // continuous auto rotation as one pausable tween
-    if (!reduced) {
+    if (!reduced && !flat) {
       R.current.auto = gsap.to(A.current, {
         angle: '+=360',
         duration: 360 / AUTO_SPEED,
@@ -212,15 +213,36 @@ export default function WorkRing({ onOpen }) {
     const stepButtons = []
     stage.parentElement?.querySelectorAll('[data-ring-step]').forEach((btn) => {
       const dir = Number(btn.dataset.ringStep)
-      const handler = () => {
-        stopSettle()
-        pauseAuto()
-        settleTo(snapped(A.current.angle) + dir * STEP_DEG, { maxDuration: 0.9 })
-      }
+      // 胶片模式：箭头按卡宽滚动；3D 模式：箭头走角度
+      const handler = flat
+        ? () => {
+            const cardW = cardRefs.current[0]?.getBoundingClientRect().width || stage.clientWidth * 0.8
+            stage.scrollBy({ left: dir * (cardW + 16), behavior: 'smooth' })
+          }
+        : () => {
+            stopSettle()
+            pauseAuto()
+            settleTo(snapped(A.current.angle) + dir * STEP_DEG, { maxDuration: 0.9 })
+          }
       btn.addEventListener('click', handler)
       stepButtons.push({ btn, handler })
     })
 
+    // 胶片模式：角标与标题跟随横向滚动位置
+    let syncFlat = null
+    if (flat) {
+      syncFlat = () => {
+        const cardW = cardRefs.current[0]?.getBoundingClientRect().width || 1
+        const idx = ((Math.round(stage.scrollLeft / (cardW + 16)) % COUNT) + COUNT) % COUNT
+        const p = projects[idx]
+        if (!p) return
+        if (capNumRef.current) capNumRef.current.textContent = p.index
+        if (capTitleRef.current) capTitleRef.current.textContent = p.title
+        if (capCatRef.current) capCatRef.current.textContent = p.category
+        cardRefs.current.forEach((card, k) => card.setAttribute('aria-current', k === idx ? 'true' : 'false'))
+      }
+      stage.addEventListener('scroll', syncFlat, { passive: true })
+    }
     const scrub = { last: 0 }
     const slider = stage.parentElement?.querySelector('#work-ring-scrub')
     const onSliderDown = () => { stopSettle(); pauseAuto() }
@@ -238,7 +260,7 @@ export default function WorkRing({ onOpen }) {
     const onSliderBlur = () => {
       settleTo(snapped(A.current.angle), { maxDuration: 0.9 })
     }
-    if (slider) {
+    if (slider && !flat) {
       slider.addEventListener('pointerdown', onSliderDown)
       slider.addEventListener('input', onSliderInput)
       slider.addEventListener('change', onSliderRelease)
@@ -247,6 +269,7 @@ export default function WorkRing({ onOpen }) {
 
     layout()
     applyAngle()
+    syncFlat?.()
 
     const cleanup = () => {
       stopSettle()
@@ -269,12 +292,15 @@ export default function WorkRing({ onOpen }) {
       window.removeEventListener('pointermove', onPointerMove)
       window.removeEventListener('pointerup', endDrag)
       stage.removeEventListener('click', onClickCapture, true)
+      stage.removeEventListener('scroll', syncFlat)
     }
 
-    stage.addEventListener('pointerdown', onPointerDown)
-    window.addEventListener('pointermove', onPointerMove)
-    window.addEventListener('pointerup', endDrag)
-    stage.addEventListener('click', onClickCapture, true)
+    if (!flat) {
+      stage.addEventListener('pointerdown', onPointerDown)
+      window.addEventListener('pointermove', onPointerMove)
+      window.addEventListener('pointerup', endDrag)
+      stage.addEventListener('click', onClickCapture, true)
+    }
     document.addEventListener('mousemove', onMouseMove, { passive: true })
     window.addEventListener('resize', onResize)
 

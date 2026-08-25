@@ -121,7 +121,11 @@ test('keeps AI stage overlays front-facing and aligned to the original artwork',
 test('stacks poster projects on narrow screens', () => {
   const mobileCss = cssBlock(css, '@media (max-width: 720px)')
   expect(mobileCss).toMatch(/\.poster-story__originals\s*{[^}]*grid-template-columns:\s*1fr/s)
-  expect(mobileCss).toMatch(/\.poster-story__stage-frames\s*{[^}]*display:\s*none/s)
+})
+
+test('keeps AI stage posters visible on mobile (no display:none regression)', () => {
+  // 回归防护：曾因手机端隐藏 .poster-story__stage-frames 导致 003 海报"加载不出来"
+  expect(css).not.toMatch(/\.poster-story__stage-frames\s*{[^}]*display:\s*none/s)
 })
 
 test('preserves the complete 16:9 AI stage on narrow screens', () => {
