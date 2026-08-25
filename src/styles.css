@@ -1948,3 +1948,22 @@ main { position:relative; z-index:1; }
   .work-ring__stage[data-ring-mode="snap"] .work-ring__card { width:78vw!important; scroll-snap-align:center; }
   .project-rail { position:relative; top:auto; overflow-x:auto; flex-wrap:nowrap; }
 }
+
+/* —— 移动端首页排版修饰：道具收进画面、卡片收紧、消除整屏死空间 —— */
+@media (max-width: 720px) {
+  /* Hero：五件道具等比缩小并完全进入画面，标题区域压暗保证可读 */
+  .hero-prop--cabinet { top: 6rem; right: -2.5rem; width: 9rem; }
+  .hero-prop--floating { top: 19%; left: 55%; width: 7.5rem; }
+  .hero-prop--lamp { top: 30%; left: -2rem; width: 7rem; }
+  .hero-prop--chair { right: -2.5rem; bottom: 2.5rem; width: 11rem; }
+  .hero-prop--spring { left: -2rem; bottom: 3.5rem; width: 9.5rem; }
+  .hero__scrim { background: linear-gradient(180deg, rgba(2,8,31,.55), rgba(2,8,31,.24) 40%, rgba(2,8,31,.6)); }
+
+  /* Strengths 卡片：数字与标题之间不再留整屏空隙 */
+  .strengths__grid > .border-glow-card,
+  .strengths__grid article { min-height: 0; }
+  .strengths__grid > .border-glow-card article { justify-content: flex-start; gap: 1.1rem; padding: 1.4rem 1.3rem; }
+
+  /* Contact：内容成组居中，不再上下两段大空白 */
+  .contact__inner { min-height: 100svh; justify-content: center; gap: 2.8rem; padding: 4rem 0 3rem; }
+}
