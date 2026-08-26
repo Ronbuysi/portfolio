@@ -13,7 +13,13 @@ export default function Hero({ ready = true }) {
   return <section id="home" className="hero" ref={rootRef}>
     <picture className="hero__scene-bg" aria-hidden="true">
       <source media="(max-width: 720px)" srcSet={heroBackground.mobile} type="image/webp" />
-      <img src={heroBackground.desktop} alt="" />
+      <img
+        src={heroBackground.desktop}
+        srcSet={`${heroBackground.mobile} 960w, ${heroBackground.desktop} 1800w`}
+        sizes="100vw"
+        fetchpriority="high"
+        alt=""
+      />
     </picture>
     <div className="hero__props" aria-hidden="true">
       {heroProps.map((item) => <picture
