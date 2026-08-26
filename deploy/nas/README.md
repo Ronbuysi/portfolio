@@ -4,6 +4,20 @@
 
 当前配置使用 `8088` 端口，避免覆盖 `5666/5667` 的 fnOS 管理后台。
 
+线上地址：`https://wcc.2004.kdns.fr`（Cloudflare Tunnel → NAS 8088）
+
+## 更新线上版本（fnOS 网页操作）
+
+1. 本机构建部署包：`cd dist && zip -qr ../deploy/nas/wcc-portfolio-site.zip .`
+2. 打开 fnOS（`https://ron123.fnos.net`）文件管理，找到 Docker Compose 项目目录
+   （Docker 应用 → Compose → `wcc-portfolio` 详情里可看项目路径）。
+3. 把 `wcc-portfolio-site.zip` 上传到项目目录（与 `docker-compose.yml` 同级）。
+4. 右键 zip → 解压到当前文件夹。
+5. 清空 `site/` 里的旧内容，把解压出的 `index.html`、`assets/`、`images/` 等
+   **移动到 `site/` 根下**（index.html 必须直接位于 site/ 内，不能多套一层文件夹）。
+6. 删除上传的 zip。浏览器强刷 `https://wcc.2004.kdns.fr` 验证；
+   如未生效，在 Docker 里重启 `wcc-portfolio` 容器（nginx 直接读文件，通常无需重启）。
+
 ## 目录结构
 
 ```text
