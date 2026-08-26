@@ -19,6 +19,7 @@ import useAutoRail from './hooks/useAutoRail'
 import useRevealOnScroll from './hooks/useRevealOnScroll'
 import useParallax from './hooks/useParallax'
 import useMotionPreference from './motion/useMotionPreference'
+import { detectLowPowerGpu } from './motion/detectLowPowerGpu'
 import { setThemeAccent } from './motion/themeAccent'
 import { projects } from './data/projects'
 import { heroPreloadSources } from './data/heroScene'
@@ -43,6 +44,10 @@ export default function App() {
   useEffect(() => {
     document.documentElement.classList.toggle('motion-forced', forced)
   }, [forced])
+
+  useEffect(() => {
+    document.documentElement.classList.toggle('low-power', detectLowPowerGpu())
+  }, [])
 
   useEffect(() => {
     document.documentElement.classList.toggle('is-ready', ready)
