@@ -2,7 +2,8 @@ import { assetUrl } from '../utils/assetUrl'
 
 export const heroBackground = {
   src: assetUrl('/images/hero/nesta-illustration-bg.jpg'),
-  mobile: assetUrl('/images/hero/nesta-illustration-bg-w960.webp'),
+  // 手机端：竖版插画封面「Where Life Breathes」（完整构图，无道具分层）
+  mobile: assetUrl('/images/hero/where-life-breathes-mobile-w960.webp'),
   desktop: assetUrl('/images/hero/nesta-illustration-bg-w1800.webp'),
 }
 

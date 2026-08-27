@@ -1704,13 +1704,10 @@ html:not(.is-ready) .hero__content > *, html:not(.is-ready) .hero__scroll-cue, h
 }
 
 @media (max-width: 720px) {
-  .hero__scene-bg img { object-position: 56% center; }
+  /* 手机端换用竖版完整插画封面（Where Life Breathes），旧道具分层不再叠加 */
+  .hero__props { display: none; }
+  .hero__scene-bg img { object-position: 68% center; }
   .hero__title { opacity: .72; }
-  .hero-prop--cabinet { top: 7rem; right: -7rem; width: 14rem; }
-  .hero-prop--floating { top: 22%; left: 48%; width: 12rem; }
-  .hero-prop--lamp { top: 31%; left: -4rem; width: 10rem; }
-  .hero-prop--chair { right: -6rem; bottom: 2rem; width: 18rem; }
-  .hero-prop--spring { left: -5rem; bottom: 4rem; width: 15rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
