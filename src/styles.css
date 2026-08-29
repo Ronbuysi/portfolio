@@ -1671,7 +1671,8 @@ html:not(.is-ready) .hero__content > *, html:not(.is-ready) .hero__scroll-cue, h
 
 .hero-prop--cabinet {
   top: clamp(5rem, 10vh, 9rem);
-  right: clamp(-7rem, -4vw, -2rem);
+  /* 道具整体收进视口内，不再出血裁边 */
+  right: clamp(1.5rem, 3vw, 4rem);
   width: clamp(16rem, 25vw, 29rem);
 }
 
@@ -1683,19 +1684,19 @@ html:not(.is-ready) .hero__content > *, html:not(.is-ready) .hero__scroll-cue, h
 
 .hero-prop--lamp {
   top: 27%;
-  left: clamp(-5rem, -2vw, -1rem);
+  left: clamp(1.5rem, 3vw, 4rem);
   width: clamp(11rem, 17vw, 20rem);
 }
 
 .hero-prop--chair {
-  right: clamp(-3rem, 2vw, 3rem);
-  bottom: clamp(-4rem, -2vh, -1rem);
+  right: clamp(1.5rem, 2.5vw, 3.5rem);
+  bottom: clamp(1.5rem, 4vh, 3.5rem);
   width: clamp(18rem, 29vw, 34rem);
 }
 
 .hero-prop--spring {
-  left: clamp(-3rem, 2vw, 3rem);
-  bottom: clamp(-5rem, -2vh, -1rem);
+  left: clamp(1.5rem, 2.5vw, 3.5rem);
+  bottom: clamp(1.5rem, 4vh, 3.5rem);
   width: clamp(15rem, 24vw, 28rem);
 }
 
@@ -1716,11 +1717,11 @@ html:not(.is-ready) .hero__content > *, html:not(.is-ready) .hero__scroll-cue, h
 .header { z-index: 6; }
 
 @media (max-width: 1024px) {
-  .hero-prop--cabinet { right: -3rem; width: clamp(10rem, 18vw, 14rem); }
+  .hero-prop--cabinet { right: 1.25rem; width: clamp(10rem, 18vw, 14rem); }
   .hero-prop--floating { left: 42%; width: clamp(9rem, 17vw, 13rem); }
-  .hero-prop--chair { right: -2rem; width: clamp(13rem, 22vw, 18rem); }
-  .hero-prop--spring { left: -2rem; width: clamp(11rem, 19vw, 15rem); }
-  .hero-prop--lamp { left: -2rem; width: clamp(8rem, 13vw, 11rem); }
+  .hero-prop--chair { right: 1.25rem; bottom: 1.25rem; width: clamp(13rem, 22vw, 18rem); }
+  .hero-prop--spring { left: 1.25rem; bottom: 1.25rem; width: clamp(11rem, 19vw, 15rem); }
+  .hero-prop--lamp { left: 1.25rem; width: clamp(8rem, 13vw, 11rem); }
 }
 
 @media (max-width: 720px) {
