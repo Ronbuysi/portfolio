@@ -55,7 +55,7 @@ export default function useHeroSceneMotion(rootRef, ready) {
 
       const entrance = gsap.timeline({ paused: true, defaults: { ease: 'power4.out' } })
         .addLabel('background')
-        .from(q('.hero__scene-bg img'), { scale: 1.06, filter: 'blur(8px)', duration: 1.1, clearProps: 'filter' }, 'background')
+        .from(q('.hero__scene-bg-img'), { scale: 1.06, filter: 'blur(8px)', duration: 1.1, clearProps: 'filter' }, 'background')
         .addLabel('title', .12)
         .from(titleChars, { yPercent: 118, duration: .9, stagger: .045 }, 'title')
         .fromTo(q('[data-depth="far"]'), { autoAlpha: 0, y: 18 }, { autoAlpha: 1, y: 0, duration: .62, immediateRender: false }, .38)

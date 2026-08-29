@@ -11,16 +11,21 @@ export default function Hero({ ready = true }) {
   useHeroSceneMotion(rootRef, ready)
 
   return <section id="home" className="hero" ref={rootRef}>
-    <picture className="hero__scene-bg" aria-hidden="true">
-      <source media="(max-width: 720px)" srcSet={heroBackground.mobile} type="image/webp" />
-      <img
-        src={heroBackground.desktop}
-        srcSet={`${heroBackground.mobile} 960w, ${heroBackground.desktop} 1800w`}
-        sizes="100vw"
-        fetchpriority="high"
-        alt=""
-      />
-    </picture>
+    <div className="hero__scene-bg" aria-hidden="true">
+      <picture>
+        <source media="(max-width: 720px)" srcSet={heroBackground.mobile} type="image/webp" />
+        <img
+          className="hero__scene-bg-img"
+          src={heroBackground.desktop}
+          srcSet={`${heroBackground.mobile} 960w, ${heroBackground.desktop} 1800w`}
+          sizes="100vw"
+          fetchpriority="high"
+          alt=""
+        />
+      </picture>
+      {/* 手机端竖屏：插画完整呈现（contain），空隙用同图放大模糊延伸 */}
+      <img className="hero__scene-bg-fill" src={heroBackground.mobile} alt="" />
+    </div>
     <div className="hero__props" aria-hidden="true">
       {heroProps.map((item) => <picture
         className={`hero-prop ${item.className}`}
