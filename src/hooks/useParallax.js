@@ -45,13 +45,13 @@ export default function useParallax(motionAllowed = true, requeryKey = null) {
           ...(scroller ? { scroller } : {}),
         })
         if (isHero) {
+          // 仅保留 figure 级缩放（不裁图）；img 级 scale 1.12 + yPercent 视差
+          // 会永久裁掉图片左右边缘（overflow:hidden），已按需求移除
           gsap.timeline({ scrollTrigger: st() })
-            .fromTo(figure, { xPercent: offsetX, scale: 0.955 }, { xPercent: offsetX, scale: 1, duration: 0.5, ease: 'none' })
+            .fromTo(figure, { scale: 0.955 }, { scale: 1, duration: 0.5, ease: 'none' })
             .to(figure, { scale: 0.955, duration: 0.5, ease: 'none' })
-          gsap.fromTo(img, { yPercent: -strength * 0.9, scale: 1.12 }, { yPercent: strength * 0.9, scale: 1.12, ease: 'none', scrollTrigger: st() })
-        } else {
-          gsap.fromTo(img, { yPercent: -strength * 0.9, scale: 1.08 }, { yPercent: strength * 0.9, scale: 1.08, ease: 'none', scrollTrigger: st() })
         }
+        // 非 hero 图片不再做 scale 视差，保证作品图完整显示不被裁边
       })
     })
 

@@ -42,7 +42,18 @@ export default function useRevealOnScroll(motionAllowed = true, requeryKey = nul
       triggers.push(...batched)
     })
 
+    // 兜底：加载时已处于视口内的元素，batch 的 onEnter 不会回溯触发
+    // （布局偏早计算时会漏标），直接显示，避免停留在 scale(1.08) 裁切态
+    const markVisibleNow = () => nodes.forEach((node) => {
+      const rect = node.getBoundingClientRect()
+      if (rect.top < window.innerHeight && rect.bottom > 0) node.classList.add('is-visible')
+    })
+    requestAnimationFrame(markVisibleNow)
+    const onLoad = () => markVisibleNow()
+    if (document.readyState !== 'complete') window.addEventListener('load', onLoad, { once: true })
+
     return () => {
+      window.removeEventListener('load', onLoad)
       triggers.forEach((trigger) => trigger.kill())
     }
   }, [motionAllowed, requeryKey])
